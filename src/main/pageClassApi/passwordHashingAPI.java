@@ -15,10 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
-
-
-
 public class passwordHashingAPI {
    public static  String password = "Test@@123";
    public  static String baseUrl = "http://127.0.0.1:8088";
@@ -41,6 +37,22 @@ public class passwordHashingAPI {
         Assert.assertEquals(response.getStatusCode(), 200);
         return (response.body().asString());
     }
+    public static long postapiGetTime(String Hash) throws IOException {
+
+        String filepath = "src/test/resources/jsonFiles/postAPIJson.json";
+        RestAssured.baseURI = baseUrl;
+        RequestSpecification request = RestAssured.given();
+        File jsonFile = new File(filepath);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String dataJsonObj = objectMapper.readTree(jsonFile).toString();
+        dataJsonObj=  dataJsonObj.replace("pass-word",password);
+        request.header("Content-Type", "application/json");
+        Response response = request.body(dataJsonObj)
+                .post("/hash");
+        Assert.assertEquals(response.getStatusCode(), 200);
+        return (response.getTime());
+    }
+
 
     public static String getapi(String Hash) throws IOException {
         String hash ="";
@@ -48,7 +60,7 @@ public class passwordHashingAPI {
 
         RestAssured.baseURI = baseUrl;
         RequestSpecification request = RestAssured.given();
-System.out.println(responsePost);
+
         Response response =
                 request.get("/hash/"+responsePost);
         Assert.assertEquals(response.getStatusCode(), 200);
