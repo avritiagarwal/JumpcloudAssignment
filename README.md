@@ -31,7 +31,9 @@ The software should support a graceful shutdown request, it should allow any rem
 3. select maven -> reload project
 4. After all dependencies are downloaded goto testng.xml
 5. Execute testng.xml 
-6. Check Report index.html in Test-Output folder
+6. Check Report index.html in JumpcloudAssignment/test-output/old/Practice Suite/
+7. Please run report in browser to check execution status.I have added my execution report as well. 
+8. You might see failed cases in report but those are for test cases that are failing because of bugs .
 
 Link to Execute Maven through command Prompt
 https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
